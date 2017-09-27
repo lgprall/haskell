@@ -15,7 +15,7 @@ mainloop inh outh =
      if ineof
        then return ()
        else do inpStr <- hGetLine inh
-               if ((length inpStr) > 4)
+               if ( (length inpStr) > 4 )
                  then hPutStrLn outh (map toLower inpStr)
                  else putStr "."
                mainloop inh outh
