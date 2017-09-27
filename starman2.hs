@@ -30,7 +30,7 @@ starman :: IO ()
 starman = do
   words <- readFile "words"
   let list = lines words
-  index <- randomRIO (0, 228981) :: IO Int
+  index <- randomRIO (0, (length list)-1) :: IO Int
   let word = list !! index
   let n = length word
   turn word [ '-' | x <- word ] n
