@@ -13,7 +13,7 @@ turn word display n =
   do if n == 0
      then putStrLn ("You lose! The word was " ++ word)
      else if word == display
-       then putStrLn "You win!"
+       then putStrLn ("You win! The word is " ++ word)
        else mkguess word display n
 
 
@@ -22,9 +22,16 @@ mkguess word display n =
   do putStr (display ++ "   " ++ take n (repeat '*'))
      putStr "  Enter your guess: "
      q <- getLine
-     let (correct, display') = check word display (q!!0)
-     let n' = if correct then n else n - 1
-     turn word display' n'
+     if q == ""
+       then mkguess word display n
+       else do
+         let char = q !! 0
+         if (elem char ['a'..'z'])
+           then do
+             let (correct, display') = check word display char
+             let n' = if correct then n else n - 1
+             turn word display' n'
+           else do mkguess word display n
 
 starman :: IO ()
 starman = do
